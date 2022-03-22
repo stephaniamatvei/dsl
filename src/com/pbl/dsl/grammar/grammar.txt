@@ -1,0 +1,51 @@
+S = {<source code>}
+
+VN = {<source code>, <set of affirmations>, <affirmation>, <function declaration>, <player>, <variable declaration>,
+      <identifier>, <letter>, <digit>, <calculator>, <steps>, <call function>, <conditions>, <number>, <equal to>,
+      <operation>, <direction>, <condition>, <variable>, <map>, <non-zero number>, <break>, <link>, <characters>}
+
+VT = {0, …, 9, a, …, z, A, …, Z, Start, End, Player, Hunter, var, for, while, break, if, else, case, Step, Right,
+      Left, Up, Down, Function, width, length, labyrinth-layout, “_”, “&&”, “||”, “:”, “=”, “==”, “;”, “{”, “}”,
+      “<”, “>”, “<=”, “>=”, “!=”, “(”, “)”, “+”, “-”, “*”, “/”, “””, ““”, “,”, “.”}
+
+P = {
+    <source code> → <map> <source code>
+    <source code> → <function declaration>* Start <player> {<set of affirmations>} End
+    <function declaration> → Function <identifier> (<identifier>+) {<set of affirmations>}
+    <identifier> → <letter> | {<letter> | <digit> | _} *
+    <set of affirmations> → < affirmation> | < affirmation><set of affirmations>
+    <affirmation> → <variable declaration> |
+                    <call function> |
+                    <calculator> |
+                    <steps> |
+                    <break> |
+                    if <conditions> {<set of affirmations>} |
+                    if <conditions> {<set of affirmations>} else {<set of affirmations>} |
+                    while (<variable> | <number >) {<set of affirmations>} |
+                    for (<variable> | <number >) {<set of affirmations>} |
+                    case { <conditions> : {{}<set of affirmations> {}} }
+    <variable declaration> → var <identifier>;
+    <call function> → <identifier> (<identifier>+);
+    <calculator> → <identifier> = <equal to>;
+    <equal to> → <identifier> |
+                 <identifier> <operation> <equal to> |
+                 <number> |
+                 <number> <operation> <equal to>
+    <operation> → + | - | * | /
+    <steps> → Step <direction>;
+    <direction> → Right | Left | Up | Down
+    <break> → break;
+    <conditions> → <variable> <condition> <variable>
+    <variable> → <identifier> | <letter>
+    <condition> → && | || | == | < | > | <= | >= | !=
+    <number> → <digit> | <digit> <number>
+    <non-zero number> → <no 0 digit> | < no 0 digit > <number>
+    <letter> → a | b | c | … | A | B | C | … | Z
+    <no 0 digit> → 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+    <digit> → 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+    <player> → Player | Hunter
+    <map> → import <link> |
+            {width: <non-zero number>, length: <non-zero number>, labyrinth-layout: “<number>”}
+    <link> → “<characters>*”
+    <characters> → 0 | … | 9 | a | … | z | A | … | Z | _ | @| # | $ | % | : | = | ; | { | } | < | > | ! | ( | ) | + | - | * | / | .
+}
