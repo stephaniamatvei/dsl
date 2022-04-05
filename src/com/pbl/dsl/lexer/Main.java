@@ -1,5 +1,9 @@
 package com.pbl.dsl.lexer;
 
+import com.pbl.dsl.RuntimeError;
+import com.pbl.dsl.parser.Parser;
+import com.pbl.dsl.parser.Stmt;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,10 +14,17 @@ import java.util.List;
 
 public class Main {
     static boolean hadError = false;
+    static boolean hadRuntimeError = false;
+
+    static void runtimeError(RuntimeError error) {
+        System.err.println(error.getMessage() +
+                "\n[line " + error.token.line + "]");
+        hadRuntimeError = true;
+    }
 
     public static void main(String[] args) throws IOException {
         if (args.length > 1) {
-            System.out.println("Usage: jlox [script]");
+            System.out.println("Usage: MAZE [script]");
             System.exit(64);
         } else if (args.length == 1) {
             runFile(args[0]);
@@ -27,6 +38,7 @@ public class Main {
         run(new String(bytes, Charset.defaultCharset()));
 
         if (hadError) System.exit(65);
+        if (hadRuntimeError) System.exit(70);
     }
 
     private static void runPrompt() throws IOException {
@@ -45,10 +57,12 @@ public class Main {
     private static void run(String source) {
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
+        Parser parser = new Parser(tokens);
+        List<Stmt> statements = parser.parse();
 
-        for (Token token : tokens) {
-            System.out.println(token);
-        }
+        // Stop if there was a syntax error.
+        if (hadError) return;
+        System.out.println(statements);
     }
 
     static void error(int line, String message) {
@@ -58,5 +72,13 @@ public class Main {
     private static void report(int line, String message) {
         System.err.println("[line " + line + "] Error" + "" + ": " + message);
         hadError = true;
+    }
+
+    public static void error(Token token, String message) {
+        if (token.type == TokenType.EOF) {
+            report(token.line, " at end" + message);
+        } else {
+            report(token.line, " at '" + token.lexeme + "'" + message);
+        }
     }
 }
