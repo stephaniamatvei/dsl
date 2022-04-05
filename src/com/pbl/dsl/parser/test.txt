@@ -1,7 +1,0 @@
-start player {
-    var movements = 6;
-
-    for(movements) {
-        step right;
-    }
-}
