@@ -1,12 +1,10 @@
 package com.pbl.dsl;
 
-import com.pbl.dsl.RuntimeError;
 import com.pbl.dsl.lexer.Scanner;
 import com.pbl.dsl.lexer.Token;
 import com.pbl.dsl.lexer.TokenType;
 import com.pbl.dsl.parser.Parser;
 import com.pbl.dsl.parser.Stmt;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,7 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class DSL_Application {
+public class DslApplication {
     static boolean hadError = false;
     static boolean hadRuntimeError = false;
 

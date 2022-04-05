@@ -1,10 +1,10 @@
 package com.pbl.dsl.lexer;
 
 public class Token {
-    final public TokenType type;
-    final public String lexeme;
-    final public Object literal;
-    final public int line;
+    public final TokenType type;
+    public final String lexeme;
+    public final Object literal;
+    public final int line;
 
     public Token(TokenType type, String lexeme, Object literal, int line) {
         this.type = type;

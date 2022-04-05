@@ -1,7 +1,6 @@
 package com.pbl.dsl.lexer;
 
-import com.pbl.dsl.DSL_Application;
-
+import com.pbl.dsl.DslApplication;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -121,7 +120,7 @@ public class Scanner {
                 } else if (isAlpha(c)) {
                     identifier();
                 } else {
-                    DSL_Application.error(line, "Unexpected character.");
+                    DslApplication.error(line, "Unexpected character.");
                 }
                 break;
         }
@@ -159,7 +158,7 @@ public class Scanner {
         }
 
         if (isAtEnd()) {
-            DSL_Application.error(line, "Unterminated string.");
+            DslApplication.error(line, "Unterminated string.");
             return;
         }
 

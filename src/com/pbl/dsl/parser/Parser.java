@@ -1,13 +1,11 @@
 package com.pbl.dsl.parser;
 
-import com.pbl.dsl.DSL_Application;
+import com.pbl.dsl.DslApplication;
 import com.pbl.dsl.lexer.Token;
 import com.pbl.dsl.lexer.TokenType;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import static com.pbl.dsl.lexer.TokenType.*;
 
 public class Parser {
@@ -138,7 +136,7 @@ public class Parser {
 
         if (match(RIGHT, LEFT, UP, DOWN))
             direction = previous();
-        else{
+        else {
             error(keyword, " must be followed by a direction");
             return new Stmt.Step(keyword, direction);
         }
@@ -329,7 +327,7 @@ public class Parser {
     }
 
     private ParseError error(Token token, String message) {
-        DSL_Application.error(token, message);
+        DslApplication.error(token, message);
         return new ParseError();
     }
 
