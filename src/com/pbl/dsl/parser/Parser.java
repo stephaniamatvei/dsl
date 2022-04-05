@@ -1,6 +1,6 @@
 package com.pbl.dsl.parser;
 
-import com.pbl.dsl.lexer.Main;
+import com.pbl.dsl.DSL_Application;
 import com.pbl.dsl.lexer.Token;
 import com.pbl.dsl.lexer.TokenType;
 
@@ -329,7 +329,7 @@ public class Parser {
     }
 
     private ParseError error(Token token, String message) {
-        Main.error(token, message);
+        DSL_Application.error(token, message);
         return new ParseError();
     }
 

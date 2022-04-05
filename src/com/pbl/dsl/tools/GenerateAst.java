@@ -1,4 +1,4 @@
-package com.pbl.dsl.tool;
+package com.pbl.dsl.tools;
 
 import java.io.IOException;
 import java.io.PrintWriter;

@@ -1,6 +1,9 @@
-package com.pbl.dsl.lexer;
+package com.pbl.dsl;
 
 import com.pbl.dsl.RuntimeError;
+import com.pbl.dsl.lexer.Scanner;
+import com.pbl.dsl.lexer.Token;
+import com.pbl.dsl.lexer.TokenType;
 import com.pbl.dsl.parser.Parser;
 import com.pbl.dsl.parser.Stmt;
 
@@ -12,7 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class Main {
+public class DSL_Application {
     static boolean hadError = false;
     static boolean hadRuntimeError = false;
 
@@ -65,7 +68,7 @@ public class Main {
         System.out.println(statements);
     }
 
-    static void error(int line, String message) {
+    public static void error(int line, String message) {
         report(line, message);
     }
 

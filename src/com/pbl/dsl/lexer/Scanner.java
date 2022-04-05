@@ -1,5 +1,7 @@
 package com.pbl.dsl.lexer;
 
+import com.pbl.dsl.DSL_Application;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,11 +49,11 @@ public class Scanner {
         keywords.put("labyrinth-layout",  TokenType.LABYRINTH_LAYOUT);
     }
 
-    Scanner(String source) {
+    public Scanner(String source) {
         this.source = source;
     }
 
-    List<Token> scanTokens() {
+    public List<Token> scanTokens() {
         while (!isAtEnd()) {
             start = current;
             scanToken();
@@ -119,7 +121,7 @@ public class Scanner {
                 } else if (isAlpha(c)) {
                     identifier();
                 } else {
-                    Main.error(line, "Unexpected character.");
+                    DSL_Application.error(line, "Unexpected character.");
                 }
                 break;
         }
@@ -157,7 +159,7 @@ public class Scanner {
         }
 
         if (isAtEnd()) {
-            Main.error(line, "Unterminated string.");
+            DSL_Application.error(line, "Unterminated string.");
             return;
         }
 
