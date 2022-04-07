@@ -57,7 +57,7 @@ public class StmtPrinter implements Stmt.Visitor<String> {
     @Override
     public String visitWhileStmt(Stmt.While stmt) {
         return "While(" + new ExprPrinter().print(stmt.condition) + ")"
-                + "{" + stmt.body.accept(this);
+                + "{" + stmt.body.accept(this) + "}";
     }
 
     private String parenthesizeTokens(List<Token> tl) {
