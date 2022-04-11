@@ -5,6 +5,8 @@ import com.pbl.dsl.lexer.Token;
 import com.pbl.dsl.lexer.TokenType;
 import com.pbl.dsl.parser.Parser;
 import com.pbl.dsl.parser.Stmt;
+import com.pbl.dsl.parser.StmtPrinter;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,7 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class DslApplication {
+public class DSL_Application {
     static boolean hadError = false;
     static boolean hadRuntimeError = false;
 
@@ -59,11 +61,11 @@ public class DslApplication {
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
         Parser parser = new Parser(tokens);
-        List<Stmt> statements = parser.parse();
+        List<Stmt> statements = parser.parse(); // var a = 2 + 3 * 4
 
         // Stop if there was a syntax error.
         if (hadError) return;
-        System.out.println(statements);
+        System.out.println(new StmtPrinter().print(statements));
     }
 
     public static void error(int line, String message) {
