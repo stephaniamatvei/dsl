@@ -1,9 +1,7 @@
 package com.pbl.dsl.parser;
 
-import java.util.Arrays;
-
 public class ExprPrinter implements Expr.Visitor<String> {
-    public String print(Expr e){
+    public String print(Expr e) {
         return e.accept(this);
     }
 
@@ -21,9 +19,9 @@ public class ExprPrinter implements Expr.Visitor<String> {
     @Override
     public String visitCallExpr(Expr.Call expr) {
         String name = expr.callee.accept(this);
-        String contents = "";
+        StringBuilder contents = new StringBuilder();
         for (Expr ex: expr.arguments) {
-            contents += ex.accept(this);
+            contents.append(ex.accept(this));
         }
         return name + "(" + contents + ")";
     }

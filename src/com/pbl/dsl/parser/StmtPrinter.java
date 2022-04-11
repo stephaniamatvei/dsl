@@ -7,11 +7,11 @@ import java.util.List;
 public class StmtPrinter implements Stmt.Visitor<String> {
 
     public String print(List<Stmt> stmts) {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (Stmt stmt : stmts) {
-            output += stmt.accept(this) + " ";
+            output.append(stmt.accept(this)).append(" ");
         }
-        return output;
+        return output.toString();
     }
 
     @Override
@@ -61,11 +61,10 @@ public class StmtPrinter implements Stmt.Visitor<String> {
     }
 
     private String parenthesizeTokens(List<Token> tl) {
-        String output = " ";
-        for (Token t :
-                tl) {
-            output += t.lexeme + " ";
+        StringBuilder output = new StringBuilder(" ");
+        for (Token t : tl) {
+            output.append(t.lexeme).append(" ");
         }
-        return output;
+        return output.toString();
     }
 }

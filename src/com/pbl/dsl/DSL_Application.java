@@ -1,6 +1,5 @@
 package com.pbl.dsl;
 
-import com.pbl.dsl.RuntimeError;
 import com.pbl.dsl.lexer.Scanner;
 import com.pbl.dsl.lexer.Token;
 import com.pbl.dsl.lexer.TokenType;
