@@ -1,11 +1,12 @@
 package com.pbl.dsl;
 
+import com.pbl.dsl.interpreter.Interpreter;
+import com.pbl.dsl.interpreter.StmtPrinter;
 import com.pbl.dsl.lexer.Scanner;
 import com.pbl.dsl.lexer.Token;
 import com.pbl.dsl.lexer.TokenType;
-import com.pbl.dsl.parser.Parser;
-import com.pbl.dsl.parser.Stmt;
-import com.pbl.dsl.parser.StmtPrinter;
+import com.pbl.dsl.interpreter.Parser;
+import com.pbl.dsl.interpreter.Stmt;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,12 +17,12 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class DSL_Application {
+    private static final Interpreter interpreter = new Interpreter();
     static boolean hadError = false;
     static boolean hadRuntimeError = false;
 
-    static void runtimeError(RuntimeError error) {
-        System.err.println(error.getMessage() +
-                "\n[line " + error.token.line + "]");
+    public static void runtimeError(RuntimeError error) {
+        System.err.println(error.getMessage() + "\n[line " + error.token.line + "]");
         hadRuntimeError = true;
     }
 
@@ -65,7 +66,9 @@ public class DSL_Application {
 
         // Stop if there was a syntax error.
         if (hadError) return;
-        System.out.println(new StmtPrinter().print(statements));
+
+        interpreter.interpret(statements);
+//        System.out.println(new StmtPrinter().print(statements));
     }
 
     public static void error(int line, String message) {

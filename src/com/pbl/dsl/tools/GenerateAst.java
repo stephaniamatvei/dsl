@@ -5,8 +5,6 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 
-
-
 public class GenerateAst {
     public static void main(String[] args) throws IOException {
         args = new String[1];
@@ -80,7 +78,7 @@ public class GenerateAst {
     private static void defineType(
             PrintWriter writer, String baseName,
             String className, String fieldList) {
-        writer.println("\n    static class " + className + " extends " +
+        writer.println("\n    public static class " + className + " extends " +
                 baseName + " {");
         // Constructor.
         writer.println("        " + className + "(" + fieldList + ") {");

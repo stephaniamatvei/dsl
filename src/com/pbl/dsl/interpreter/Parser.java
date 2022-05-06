@@ -1,4 +1,4 @@
-package com.pbl.dsl.parser;
+package com.pbl.dsl.interpreter;
 
 import com.pbl.dsl.DSL_Application;
 import com.pbl.dsl.lexer.Token;
@@ -33,6 +33,26 @@ public class Parser {
         if (match(RETURN)) return returnStatement();
         if (match(STEP)) return stepStatement();
         return expressionStatement();
+    }
+
+    private Stmt expressionStatement() {
+        Expr expr = expression();
+        consume(SEMICOLON, "Expect ';' after expression.");
+        return new Stmt.Expression(expr);
+    }
+
+    private Expr assignment() {
+        Expr expr = equality();
+        if (match(EQUAL)) {
+            Token equals = previous();
+            Expr value = assignment();
+            if (expr instanceof Expr.Variable) {
+                Token name = ((Expr.Variable)expr).name;
+                return new Expr.Assign(name, value);
+            }
+            error(equals, "Invalid assignment target.");
+        }
+        return expr;
     }
 
     private Stmt varDeclaration() {
@@ -92,12 +112,6 @@ public class Parser {
         consume(RIGHT_PAREN, "Expect ')' after condition.");
         Stmt body = statement();
         return new Stmt.While(condition, body);
-    }
-
-    private Stmt expressionStatement() {
-        Expr expr = expression();
-        consume(SEMICOLON, "Expect ';' after expression.");
-        return new Stmt.Expression(expr);
     }
 
     private Stmt.Function function(String kind) {
@@ -164,20 +178,6 @@ public class Parser {
             elseBranch = statement();
         }
         return new Stmt.If(condition, thenBranch, elseBranch);
-    }
-
-    private Expr assignment() {
-        Expr expr = or();
-        if (match(EQUAL)) {
-            Token equals = previous();
-            Expr value = assignment();
-            if (expr instanceof Expr.Variable) {
-                Token name = ((Expr.Variable) expr).name;
-                return new Expr.Assign(name, value);
-            }
-            error(equals, "Invalid assignment target.");
-        }
-        return expr;
     }
 
     private Expr or() {

@@ -1,4 +1,4 @@
-package com.pbl.dsl.parser;
+package com.pbl.dsl.interpreter;
 
 import java.util.List;
 import com.pbl.dsl.lexer.Token;
@@ -15,7 +15,7 @@ public abstract class Expr {
         R visitVariableExpr(Variable expr);
     }
 
-    static class Assign extends Expr {
+    public static class Assign extends Expr {
         Assign(Token name, Expr value) {
             this.name = name;
             this.value = value;
@@ -30,7 +30,7 @@ public abstract class Expr {
         final Expr value;
     }
 
-    static class Binary extends Expr {
+    public static class Binary extends Expr {
         Binary(Token operator, Expr left, Expr right) {
             this.operator = operator;
             this.left = left;
@@ -47,7 +47,7 @@ public abstract class Expr {
         final Expr right;
     }
 
-    static class Call extends Expr {
+    public static class Call extends Expr {
         Call(Expr callee, Token paren, List<Expr> arguments) {
             this.callee = callee;
             this.paren = paren;
@@ -64,7 +64,7 @@ public abstract class Expr {
         final List<Expr> arguments;
     }
 
-    static class Grouping extends Expr {
+    public static class Grouping extends Expr {
         Grouping(Expr expr) {
             this.expr = expr;
         }
@@ -77,7 +77,7 @@ public abstract class Expr {
         final Expr expr;
     }
 
-    static class Literal extends Expr {
+    public static class Literal extends Expr {
         Literal(Object value) {
             this.value = value;
         }
@@ -90,7 +90,7 @@ public abstract class Expr {
         final Object value;
     }
 
-    static class Logical extends Expr {
+    public static class Logical extends Expr {
         Logical(Expr left, Token operator, Expr right) {
             this.left = left;
             this.operator = operator;
@@ -107,7 +107,7 @@ public abstract class Expr {
         final Expr right;
     }
 
-    static class Unary extends Expr {
+    public static class Unary extends Expr {
         Unary(Token operator, Expr right) {
             this.operator = operator;
             this.right = right;
@@ -122,7 +122,7 @@ public abstract class Expr {
         final Expr right;
     }
 
-    static class Variable extends Expr {
+    public static class Variable extends Expr {
         Variable(Token name) {
             this.name = name;
         }

@@ -1,4 +1,4 @@
-package com.pbl.dsl.parser;
+package com.pbl.dsl.interpreter;
 
 import java.util.List;
 import com.pbl.dsl.lexer.Token;
@@ -15,7 +15,7 @@ public abstract class Stmt {
         R visitWhileStmt(While stmt);
     }
 
-    static class Block extends Stmt {
+    public static class Block extends Stmt {
         Block(List<Stmt> statements) {
             this.statements = statements;
         }
@@ -28,7 +28,7 @@ public abstract class Stmt {
         final List<Stmt> statements;
     }
 
-    static class Expression extends Stmt {
+    public static class Expression extends Stmt {
         Expression(Expr expression) {
             this.expression = expression;
         }
@@ -41,7 +41,7 @@ public abstract class Stmt {
         final Expr expression;
     }
 
-    static class Function extends Stmt {
+    public static class Function extends Stmt {
         Function(Token name, List<Token> params, List<Stmt> body) {
             this.name = name;
             this.params = params;
@@ -58,7 +58,7 @@ public abstract class Stmt {
         final List<Stmt> body;
     }
 
-    static class If extends Stmt {
+    public static class If extends Stmt {
         If(Expr condition, Stmt thenBranch, Stmt elseBranch) {
             this.condition = condition;
             this.thenBranch = thenBranch;
@@ -75,7 +75,7 @@ public abstract class Stmt {
         final Stmt elseBranch;
     }
 
-    static class Var extends Stmt {
+    public static class Var extends Stmt {
         Var(Token name, Expr initializer) {
             this.name = name;
             this.initializer = initializer;
@@ -90,7 +90,7 @@ public abstract class Stmt {
         final Expr initializer;
     }
 
-    static class Step extends Stmt {
+    public static class Step extends Stmt {
         Step(Token keyword, Token direction) {
             this.keyword = keyword;
             this.direction = direction;
@@ -105,7 +105,7 @@ public abstract class Stmt {
         final Token direction;
     }
 
-    static class Return extends Stmt {
+    public static class Return extends Stmt {
         Return(Token keyword, Expr value) {
             this.keyword = keyword;
             this.value = value;
@@ -120,7 +120,7 @@ public abstract class Stmt {
         final Expr value;
     }
 
-    static class While extends Stmt {
+    public static class While extends Stmt {
         While(Expr condition, Stmt body) {
             this.condition = condition;
             this.body = body;

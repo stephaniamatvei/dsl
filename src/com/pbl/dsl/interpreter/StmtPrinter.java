@@ -1,4 +1,4 @@
-package com.pbl.dsl.parser;
+package com.pbl.dsl.interpreter;
 
 import com.pbl.dsl.lexer.Token;
 
