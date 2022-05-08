@@ -1,12 +1,9 @@
 package com.pbl.dsl;
 
-import com.pbl.dsl.interpreter.Interpreter;
-import com.pbl.dsl.interpreter.StmtPrinter;
+import com.pbl.dsl.interpreter.*;
 import com.pbl.dsl.lexer.Scanner;
 import com.pbl.dsl.lexer.Token;
 import com.pbl.dsl.lexer.TokenType;
-import com.pbl.dsl.interpreter.Parser;
-import com.pbl.dsl.interpreter.Stmt;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -66,6 +63,9 @@ public class DSL_Application {
 
         // Stop if there was a syntax error.
         if (hadError) return;
+
+        Resolver resolver = new Resolver(interpreter);
+        resolver.resolve(statements);
 
         interpreter.interpret(statements);
 //        System.out.println(new StmtPrinter().print(statements));
