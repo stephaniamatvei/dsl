@@ -1,6 +1,7 @@
 package com.pbl.dsl.interpreter;
 
 import com.pbl.dsl.DSL_Application;
+import com.pbl.dsl.GameState;
 import com.pbl.dsl.RuntimeError;
 import com.pbl.dsl.lexer.Token;
 import com.pbl.dsl.lexer.TokenType;
@@ -13,6 +14,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     final Environment globals = new Environment();
     private Environment environment = globals;
     private final Map<Expr, Integer> locals = new HashMap<>();
+    public GameState game = new GameState();
 
     public Interpreter() {
         globals.define("clock", new DslCallable() {
@@ -127,7 +129,8 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     public void interpret(List<Stmt> statements) {
         try {
             for (Stmt statement : statements) {
-                execute(statement);
+                if (!game.win)
+                    execute(statement);
             }
         } catch (RuntimeError error) {
             DSL_Application.runtimeError(error);
