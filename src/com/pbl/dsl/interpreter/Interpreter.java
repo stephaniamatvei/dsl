@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import static java.lang.Thread.sleep;
 
 public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     final Environment globals = new Environment();
@@ -108,6 +111,19 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
     @Override
     public Void visitStepStmt(Stmt.Step stmt) {
+        switch (stmt.direction.type) {
+            case RIGHT -> this.game.moveRight();
+            case LEFT -> this.game.moveLeft();
+            case UP ->  this.game.moveUp();
+            case DOWN -> this.game.moveDown();
+        }
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         return null;
     }
 

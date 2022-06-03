@@ -81,12 +81,6 @@ public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
     // trebuie de inclus steps
     @Override
     public Void visitStepStmt(Stmt.Step stmt) {
-        switch (stmt.direction.type) {
-            case RIGHT -> interpreter.game.moveRight();
-            case LEFT -> interpreter.game.moveLeft();
-            case UP ->  interpreter.game.moveUp();
-            case DOWN -> interpreter.game.moveDown();
-        }
         return null;
     }
 
