@@ -1,3 +1,4 @@
+
 # *Domain Specific Language for Children's Maze Game*
 
 ## Table of Contents
@@ -5,8 +6,7 @@
 * [Goal](#goal)
 * [Objectives](#objectives)
 * [Grammar](#grammar)
-* [Input](#input)
-* [Output](#output)
+* [Input and Output](#input-and-output)
 
 ## Goal
 
@@ -75,8 +75,9 @@ P = {
 }
 ```
 
-## Input
-**Example 1:**
+## Input and Output
+
+### Example 1:
 
 ```
 > step right;
@@ -84,7 +85,9 @@ P = {
 > var a = 0; while (a < 5) {a = a + 1; step right;}
 ```
 
-**Example 2:**
+![maze-game](https://user-images.githubusercontent.com/78982185/172125276-68235152-45f7-42df-b5f2-c6740edf891b.gif)
+
+### Example 2:
 
 ```
 > step right;
@@ -95,7 +98,9 @@ P = {
 
 ```
 
-**Example 3:**
+![maze-game-2](https://user-images.githubusercontent.com/78982185/172127982-7603ad79-1e7e-41ae-9b49-853c2308e27f.gif)
+
+### Example 3:
 
 ```
 > step right;
@@ -110,11 +115,7 @@ P = {
 
 ```
 
-## Output
-
-![maze-game](https://user-images.githubusercontent.com/78982185/172125276-68235152-45f7-42df-b5f2-c6740edf891b.gif)
-
-
+![maze-game-3](https://user-images.githubusercontent.com/78982185/172131223-08723ca6-22de-41b3-a68a-6fb5d4fd0dee.gif)
 
 
 
